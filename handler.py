@@ -431,6 +431,10 @@ class BotHandler():
         else:
             c.kick(target, nick, self.modules['slogan'].gen_slogan(msg).upper())
 
+    def do_flag(self, msg, nick, send):
+        if re.match(".*[A-Fa-f0-9]{8}.*", msg):
+            send("%s, sharing flags is against the rules! Please do not share flags during the competition.")
+
     def do_caps(self, msg, c, target, nick, send):
         """ Check for capslock abuse.
 
@@ -668,6 +672,7 @@ class BotHandler():
 
         self.do_caps(msg, c, target, nick, send)
         self.do_band(msg, send)
+        self.do_flag(msg, nick, send)
 
         # is this a command?
         cmd = msg.split()[0]
